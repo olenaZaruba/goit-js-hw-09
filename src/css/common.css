@@ -17,7 +17,7 @@ img {
   max-width: 100%;
 }
 .timer {
-  margin-top: 15pxgit;
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   gap: 15px;
