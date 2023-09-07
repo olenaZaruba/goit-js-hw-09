@@ -5,13 +5,14 @@ const refs = {
   stopBtn: document.querySelector('[data-stop]'),
   body: document.querySelector('body'),
 };
-
+refs.stopBtn.disabled = true;
 refs.startBtn.addEventListener('click', () => {
   timerId = setInterval(() => {
     const random = getRandomHexColor();
     refs.body.style.backgroundColor = random;
   }, 1000);
   refs.startBtn.disabled = true;
+  refs.stopBtn.disabled = false;
 });
 
 refs.stopBtn.addEventListener('click', () => {
