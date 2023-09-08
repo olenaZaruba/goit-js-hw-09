@@ -6,6 +6,7 @@ const refs = {
   body: document.querySelector('body'),
 };
 refs.stopBtn.disabled = true;
+let timerId = null;
 refs.startBtn.addEventListener('click', () => {
   timerId = setInterval(() => {
     const random = getRandomHexColor();
@@ -17,7 +18,6 @@ refs.startBtn.addEventListener('click', () => {
 
 refs.stopBtn.addEventListener('click', () => {
   clearInterval(timerId);
-  refs.body.style.backgroundColor = refs.body.style.backgroundColor;
   refs.startBtn.disabled = false;
 });
 
