@@ -58,7 +58,7 @@ function onClickBtn(evt) {
     ms -= 1000;
     console.log(ms);
 
-    if (ms < 100) {
+    if (ms <= 0) {
       stopTimer();
       console.log('Timer stopped!');
     }
