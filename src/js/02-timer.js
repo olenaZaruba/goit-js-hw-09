@@ -12,6 +12,8 @@ const refs = {
 };
 const currentDate = new Date();
 let userSelectedDate = null;
+let timerId = null;
+refs.startBtn.disabled = true;
 
 flatpickr(refs.selectData, {
   enableTime: true,
@@ -22,7 +24,6 @@ flatpickr(refs.selectData, {
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
     if (userSelectedDate < new Date()) {
-      refs.startBtn.disabled = true;
       window.alert('Please choose a date in the future');
     } else {
       refs.startBtn.disabled = false;
@@ -33,8 +34,10 @@ flatpickr(refs.selectData, {
 refs.startBtn.addEventListener('click', onClickBtn);
 
 function onClickBtn(evt) {
+  refs.startBtn.disabled = true;
+  refs.selectData.disabled = true;
   let ms = userSelectedDate.getTime() - currentDate.getTime();
-  setInterval(() => {
+  timerId = setInterval(() => {
     function convertMs(ms) {
       const second = 1000;
       const minute = second * 60;
@@ -54,7 +57,19 @@ function onClickBtn(evt) {
     refs.seconds.textContent = addLeadingZero(convertMs(ms).seconds);
     ms -= 1000;
     console.log(ms);
+
+    if (ms < 100) {
+      stopTimer();
+      console.log('Timer stopped!');
+    }
   }, 1000);
+}
+
+function stopTimer() {
+  refs.startBtn.disabled = true;
+  refs.selectData.disabled = false;
+  clearInterval(timerId);
+  return;
 }
 
 function addLeadingZero(value) {

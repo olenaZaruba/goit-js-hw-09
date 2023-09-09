@@ -15,7 +15,7 @@ function onPromiseCreate(evt) {
   let amount = Number(refs.amount.value);
 
   for (let i = 1; i <= amount; i += 1) {
-    let delayPromise = delayImput + step * i;
+    let delayPromise = delayImput + step * (i - 1);
 
     createPromise(i, delayPromise)
       .then(({ position, delay }) => {
@@ -25,6 +25,7 @@ function onPromiseCreate(evt) {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       });
   }
+  evt.currentTarget.reset();
 }
 
 function createPromise(position, delay) {
